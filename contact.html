@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Kontak Sederhana</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Form Kontak -->
+    <div class="contact-form-container">
+        <h2>Kontak Kami</h2>
+        <form id="contactForm" action="#" method="post" onsubmit="return validateForm()">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Pesan:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Kirim Pesan</button>
+
+            <!-- Error message -->
+            <p id="errorMessage" style="color: red; display: none;"></p>
+        </form>
+    </div>
+
+    <script>
+        // Fungsi untuk memvalidasi form
+function validateForm() {
+    // Mendapatkan nilai dari input field
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Reset pesan error
+    errorMessage.style.display = 'none';
+    errorMessage.textContent = '';
+
+    // Validasi apakah semua field sudah diisi
+    if (!name || !email || !message) {
+        errorMessage.textContent = 'Harap isi semua field.';
+        errorMessage.style.display = 'block';
+        return false; // Mencegah form di-submit
+    }
+
+    // Validasi format email
+    if (!isValidEmail(email)) {
+        errorMessage.textContent = 'Harap masukkan format email yang benar.';
+        errorMessage.style.display = 'block';
+        return false; // Mencegah form di-submit
+    }
+
+    // Jika semua validasi lolos
+    return true;
+}
+
+// Fungsi untuk memeriksa format email
+function isValidEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailPattern.test(email);
+}
+
+    </script>
+</body>
+</html>
